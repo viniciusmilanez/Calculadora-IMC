@@ -1,49 +1,86 @@
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import React from 'react';
 import {View, Text, StyleSheet, Button, TouchableOpacity, BackHandler, TextInput} from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+/* import CheckBox from '@react-native-community/checkbox'; */
+import { Picker } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import User from 'react-native-vector-icons/FontAwesome';
-User.loadFont()
+import Certo from 'react-native-vector-icons/FontAwesome';
+import Alt from 'react-native-vector-icons/FontAwesome';
+import Kilo from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 export default function Aplicativo() {
+  const [peso,setPeso] = React.useState(0.00);
+  const [altura,setAltura] = React.useState(0.00);
+  const [imc,setImc] = React.useState(0.00);
+  const [linguagem,setLinguagem] = React.useState('js');
 
+  function calculaImc(peso,altura){
+    var resultado = peso / (altura * altura)
+    setImc(resultado)
+    console.log('valor do imc:',imc)
+    console.log('valor de altura',altura)
+    console.log('valor de peso',peso)
+  
+  }
     return (
         <View style={styles.container}>
 
             <Text style={{ fontSize: 20,fontWeight: 'bold', color:"#e30000"}}>{"\n"}CALCULADORA DE IMC</Text>
-            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>----------------</Text>
-            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>----------------</Text>
-            <Text style={{ fontSize: 20,fontWeight:'bold', color:"#FAFAFA"}}> Qual o seu peso?</Text>
-            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>----------------</Text>
-            <TextInput style={{ fontSize: 15,color:"#FAFAFA"}}> Digite aqui </TextInput>
-            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>----------------</Text>
+
+            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>-</Text>
+            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>-</Text>
+
+            <Kilo name="weight-kilogram" size={30} color="black"></Kilo>
+
+            <Text style={{ fontSize: 20,fontWeight:'bold', color:"#FAFAFA"}}>Qual o seu peso?</Text>
+            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>-</Text>
+
+            <TextInput style={{ fontSize: 15,color:"#FAFAFA"}}
+            placeholder="Digite aqui"
+            onChangeText={valor => setPeso(valor)}
+            value={peso} 
+            ></TextInput>
+
+            
+            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>-</Text>
+
+            <Alt name="expand" size={30} color="black"></Alt>
+
             <Text style={{ fontSize: 20,fontWeight:'bold', color:"#FAFAFA"}}> Qual sua altura?</Text>
-            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>----------------</Text>
-            <TextInput style={{ fontSize: 15,color:"#FAFAFA"}}> Digite aqui </TextInput>
-            <CheckBox checar = {false} style={styles.container}
-            onPress={() => this.umPressionado()}
-            />
-            <Text style={{ fontSize:15,fontWeight:'bold', color:"#09f04d"}}>Criança</Text>
-            <CheckBox checar= {false}
-            onPress={() => this.doisPressionado()}
-            />
-            <Text style={{ fontSize:15,fontWeight:'bold', color:"#0924f0"}}>Adulto</Text>
-           <CheckBox checar= {false}
-           onPress={() => this.tresPressionado()}
-           />
-           <Text style={{ fontSize:15,fontWeight:'bold', color:"#f08d09"}}>Idoso</Text>
-           <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>----------------</Text>
-            <TouchableOpacity style={styles.ident1} 
-              onPress={() => navigation.navigate('calcular o peso')}>
-              <User name="user" size={20} color="purple"></User>
+            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>-</Text>
+
+            <TextInput style={{ fontSize: 15,color:"#FAFAFA"}}
+            placeholder="Digite aqui"
+            onChangeText={(valor) => setAltura(valor)}
+            value={altura} 
+            ></TextInput>
+            
+            
+           <Picker
+           selectedValue={linguagem}
+           style={{height: 50, width: 100}}
+           onValueChange={(itemValue, itemIndex) =>
+           setLinguagem(itemValue)
+           }>
+           <Picker.Item label="Criança" value="java" />
+           <Picker.Item label="Adulto" value="a" />
+          <Picker.Item label="Idoso" value="js" />   
+
+
+          </Picker> 
+          <TouchableOpacity style={styles.ident1} 
+              onPress={() => calculaImc(peso,altura)}>
+              <Certo name="check" size={20} color="lightgreen"></Certo>
               <Text style={{ fontSize: 15,fontWeight: 'bold'}}>Calcular</Text>
             </TouchableOpacity>
-            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>----------------</Text>
-            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>----------------</Text>
-            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>----------------</Text>
-            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>----------------</Text>
+           <Text>{'\n'}</Text>
+           <Text>Peso: {peso} Altura: {altura} IMC: {imc.toFixed(2)} </Text>
+
+            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>-</Text>
+            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>-</Text>
+            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>-</Text>
+            <Text style={{ fontSize: 20,fontWeight: 'bold',color:"gray"}}>-</Text>
             </View>
     )
 }
