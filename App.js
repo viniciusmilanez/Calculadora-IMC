@@ -23,16 +23,16 @@ export default function Aplicativo() {
     console.log('valor de peso',peso)
 
     if (resultado < 18.5) {
-      alert("Baixo Peso" + resultado)
+      alert("Baixo Peso" + resultado.toFixed(2))
     }
     else if (resultado >=18.5 && resultado<24.9) {
-      alert("Peso saudável" + resultado)
+      alert("Peso saudável" + resultado.toFixed(2))
     }
     else if (resultado >=25 && resultado<29.9) {
-      alert("Sobrepeso" + resultado)
+      alert("Sobrepeso" + resultado.toFixed(2))
     }
     else if (resultado >= 30) {
-      alert("Obesidade" + resultado)
+      alert("Obesidade" + resultado.toFixed(2))
     }
   }
     return (
