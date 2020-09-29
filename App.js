@@ -21,7 +21,19 @@ export default function Aplicativo() {
     console.log('valor do imc:',imc)
     console.log('valor de altura',altura)
     console.log('valor de peso',peso)
-  
+
+    if (resultado < 18.5) {
+      alert("Baixo Peso" + resultado)
+    }
+    else if (resultado >=18.5 && resultado<24.9) {
+      alert("Peso saudável" + resultado)
+    }
+    else if (resultado >=25 && resultado<29.9) {
+      alert("Sobrepeso" + resultado)
+    }
+    else if (resultado >= 30) {
+      alert("Obesidade" + resultado)
+    }
   }
     return (
         <View style={styles.container}>
